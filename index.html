@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>Run & Train</title>
+<style>
+body{margin:0;background:#f3f4f6;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}header{background:#111827;color:white;padding:20px}main{max-width:720px;margin:auto;padding:12px}.card{background:white;border:1px solid #e5e7eb;border-radius:16px;padding:15px;margin:10px 0}.week{display:flex;justify-content:space-between}.badge{font-size:12px;background:#f3f4f6;padding:5px 9px;border-radius:99px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.metric label{display:block;font-size:12px;color:#6b7280;margin-bottom:5px}.metric input,.metric select,.metric textarea{width:100%;box-sizing:border-box;border:1px solid #e5e7eb;border-radius:9px;padding:10px;font-size:15px}.metric textarea{min-height:65px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}button{border:0;border-radius:9px;padding:10px 13px;background:#111827;color:white;font-weight:600}button.secondary{background:#e5e7eb;color:#111827}.day{display:flex;gap:12px}.icon{font-size:27px}.date,.small{font-size:12px;color:#6b7280}.title{font-weight:700}.desc{font-size:13px;line-height:1.5;color:#4b5563;margin-top:5px}.check{margin-left:auto;width:28px;height:28px}.done{background:#e8f5e9}.progress{height:9px;background:#e5e7eb;border-radius:99px;overflow:hidden}.bar{height:100%;background:#111827;width:0%}footer{text-align:center;color:#6b7280;font-size:12px;padding:20px}
+</style>
+</head>
+<body>
+<header><h1>🏃 Run & Train</h1><div>トレーニング記録・コンディション管理</div></header>
+<main>
+<section class="card"><div class="week"><strong>今週のトレーニング</strong><span class="badge">試用版</span></div><p class="small">Zone 2を基本に、疲労と内転筋の状態を見ながら調整します。</p><div class="progress"><div id="bar" class="bar"></div></div><p id="pct" class="small">0 / 7 完了</p></section>
+<div id="days"></div>
+<section class="card"><div class="week"><strong>🏃 ランニング記録</strong><span class="badge">入力</span></div>
+<div class="grid">
+<label class="metric">日付<input id="date" type="date"></label>
+<label class="metric">距離 km<input id="distance" type="number" step="0.01"></label>
+<label class="metric">時間 分<input id="duration" type="number"></label>
+<label class="metric">平均心拍 bpm<input id="hr" type="number"></label>
+<label class="metric">Zone 2時間 分<input id="z2" type="number"></label>
+<label class="metric">Running Index<input id="ri" type="number"></label>
+<label class="metric">RPE 1～10<select id="rpe"><option value="">未入力</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></label>
+<label class="metric">疲労 1～5<select id="fatigue"><option value="">未入力</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
+<label class="metric">内転筋 0～5<select id="groin"><option value="">未入力</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
+</div><div class="metric" style="margin-top:10px">メモ<textarea id="note"></textarea></div>
+<div class="actions"><button onclick="saveRun()">保存</button><button class="secondary" onclick="clearForm()">入力をクリア</button></div></section>
+
+<section class="card"><div class="week"><strong>🚲💪 その他の運動</strong><span class="badge">入力</span></div>
+<div class="grid"><label class="metric">日付<input id="odate" type="date"></label><label class="metric">種目<select id="otype"><option>自転車</option><option>筋トレ</option><option>ウォーキング</option><option>ストレッチ・モビリティ</option><option>その他</option></select></label><label class="metric">時間 分<input id="otime" type="number"></label><label class="metric">強度 1～5<select id="oint"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label></div>
+<div class="metric">メモ<textarea id="onote"></textarea></div><div class="actions"><button onclick="saveOther()">保存</button></div></section>
+
+<section class="card"><div class="week"><strong>📊 今週の集計</strong></div><div id="summary" class="desc"></div><div class="actions"><button onclick="copyWeek()">今週のデータをコピー</button><button class="secondary" onclick="historyLog()">過去の記録</button></div></section>
+<section class="card"><strong>使い方</strong><p class="desc">ランニング後にPolarから距離・時間・平均心拍・Zone 2時間・Running Indexを入力し、RPE・疲労・内転筋も記録します。週末に「今週のデータをコピー」を押し、ここに貼り付けてください。</p></section>
+</main><footer>記録はこの端末のブラウザ内に保存されます。</footer>
+<script>
+const K="runtrain_trial_20260824";
+const plan=[["月","8/24","🚲","自転車 30～45分","軽いギア。会話できる程度。"],["火","8/25","🏃","イージーラン 30～40分","Zone 2を基本。違和感が増えたらウォークへ。"],["水","8/26","💪","軽い筋トレ 20～30分","ヒップリフト、クラムシェル、プランクなど。"],["木","8/27","🚲","自転車 40～60分","軽～中強度。重いギアは避ける。"],["金","8/28","🏃","イージーラン 30～40分","楽に走れる範囲。"],["土","8/29","💪","筋トレ 15～25分＋軽い有酸素","余裕を残して終了。"],["日","8/30","🏃","ゆっくりラン 60～70分","終始楽な強度。違和感があれば短縮。"]];
+function get(){return JSON.parse(localStorage.getItem(K)||'{"checks":{},"runs":[],"other":[]}')}
+function save(x){localStorage.setItem(K,JSON.stringify(x))}
+function today(){return new Date().toISOString().slice(0,10)}
+function render(){let d=get(),root=document.getElementById("days");root.innerHTML="";plan.forEach((p,i)=>{let c=!!d.checks[i];root.innerHTML+=`<section class="card ${c?"done":""}"><div class="day"><div class="icon">${p[2]}</div><div><div class="date">${p[0]}曜日 ${p[1]}</div><div class="title">${p[3]}</div><div class="desc">${p[4]}</div></div><input class="check" type="checkbox" ${c?"checked":""} onchange="toggle(${i},this.checked)"></div></section>`});let n=plan.filter((_,i)=>d.checks[i]).length;document.getElementById("bar").style.width=n/7*100+"%";document.getElementById("pct").textContent=n+" / 7 完了";summary()}
+function toggle(i,v){let d=get();d.checks[i]=v;save(d);render()}
+function v(id){return document.getElementById(id).value}
+function saveRun(){let d=get(),r={date:v("date")||today(),distance:v("distance"),duration:v("duration"),hr:v("hr"),z2:v("z2"),ri:v("ri"),rpe:v("rpe"),fatigue:v("fatigue"),groin:v("groin"),note:v("note")};if(!r.distance&&!r.duration)return alert("距離または時間を入力してください。");d.runs.push(r);save(d);clearForm();summary();alert("保存しました。")}
+function clearForm(){["distance","duration","hr","z2","ri","rpe","fatigue","groin","note"].forEach(x=>document.getElementById(x).value="");document.getElementById("date").value=today()}
+function saveOther(){let d=get(),o={date:v("odate")||today(),type:v("otype"),time:v("otime"),intensity:v("oint"),note:v("onote")};if(!o.time)return alert("時間を入力してください。");d.other.push(o);save(d);document.getElementById("otime").value="";document.getElementById("onote").value="";summary();alert("保存しました。")}
+function summary(){let d=get(),r=d.runs,o=d.other,km=r.reduce((a,x)=>a+(+x.distance||0),0),tm=r.reduce((a,x)=>a+(+x.duration||0),0),z=r.reduce((a,x)=>a+(+x.z2||0),0);document.getElementById("summary").innerHTML=`ランニング <b>${km.toFixed(2)} km</b> ／ ${tm}分 ／ Zone 2 <b>${z}分</b><br>ランニング記録 ${r.length}回 ／ 自転車 ${o.filter(x=>x.type==="自転車").reduce((a,x)=>a+(+x.time||0),0)}分 ／ 筋トレ ${o.filter(x=>x.type==="筋トレ").length}回`}
+function copyWeek(){let d=get(),a=["【今週のトレーニング記録】",""];d.runs.forEach(x=>a.push(`${x.date} ランニング ${x.distance||"—"}km / ${x.duration||"—"}分 / 平均HR ${x.hr||"—"} / Zone2 ${x.z2||"—"}分 / Running Index ${x.ri||"—"} / RPE ${x.rpe||"—"} / 疲労 ${x.fatigue||"—"} / 内転筋 ${x.groin||"—"}${x.note?" / "+x.note:""}`));d.other.forEach(x=>a.push(`${x.date} ${x.type} ${x.time}分 / 強度${x.intensity}${x.note?" / "+x.note:""}`));let s=a.join("\n");navigator.clipboard?navigator.clipboard.writeText(s).then(()=>alert("コピーしました。このチャットに貼り付けてください。")):prompt("コピーしてください",s)}
+function historyLog(){let d=get();alert(d.runs.map(x=>x.date+" ラン "+x.distance+"km HR"+x.hr+" RI"+x.ri).concat(d.other.map(x=>x.date+" "+x.type+" "+x.time+"分")).join("\n")||"まだ記録がありません。")}
+document.getElementById("date").value=today();document.getElementById("odate").value=today();render();
+</script></body></html>
