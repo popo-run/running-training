@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>Run & Train</title>
+<style>
+:root{--bg:#f3f4f6;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#111827;--done:#e8f5e9}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
+header{background:#111827;color:white;padding:22px 18px 18px;position:sticky;top:0;z-index:5}
+h1{font-size:22px;margin:0 0 4px}.sub{font-size:13px;color:#d1d5db}
+main{max-width:720px;margin:auto;padding:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin:10px 0;box-shadow:0 1px 2px #00000008}
+.week{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.week strong{font-size:17px}.badge{font-size:12px;padding:5px 9px;border-radius:99px;background:#f3f4f6;color:#374151}
+.day{display:flex;gap:12px;align-items:flex-start}.icon{font-size:27px;width:34px;text-align:center}.date{font-size:12px;color:var(--muted)}.title{font-weight:700;margin-top:2px}.desc{font-size:13px;line-height:1.55;color:#4b5563;margin-top:6px}
+.check{margin-left:auto;appearance:none;width:28px;height:28px;border:2px solid #9ca3af;border-radius:8px;flex:none;position:relative}.check:checked{background:#111827;border-color:#111827}.check:checked:after{content:"✓";color:#fff;position:absolute;left:5px;top:0px;font-size:20px}
+.done{background:var(--done)}.done .title{text-decoration:line-through;color:#6b7280}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.metric input,.metric select,.metric textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:15px;background:#fff}.metric textarea{min-height:70px;resize:vertical}
+.progress{height:9px;background:#e5e7eb;border-radius:99px;overflow:hidden}.bar{height:100%;background:#111827;width:0%;transition:.2s}.small{font-size:12px;color:var(--muted)}
+button{border:0;border-radius:10px;padding:10px 13px;background:#111827;color:#fff;font-weight:600}button.secondary{background:#e5e7eb;color:#111827}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+footer{padding:20px 14px 35px;text-align:center;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <h1>🏃 Run & Train</h1>
+  <div class="sub">ハーフ → フルマラソン トレーニング</div>
+</header>
+<main>
+  <section class="card">
+    <div class="week"><strong>今週のテーマ</strong><span class="badge">回復を優先</span></div>
+    <div class="small">左内転筋の違和感があるため、速いランは休止。毎日「何かをする」ことを目標にします。</div>
+    <div style="margin-top:12px" class="progress"><div id="bar" class="bar"></div></div>
+    <div id="pct" class="small" style="margin-top:6px">0 / 7 完了</div>
+  </section>
+
+  <div id="days"></div>
+
+  <section class="card">
+    <div class="week"><strong>今日のコンディション</strong><span class="badge">記録</span></div>
+    <div class="grid">
+      <div class="metric"><label>疲労度（1=軽い）</label><select id="fatigue"><option value="">未入力</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+      <div class="metric"><label>内転筋の違和感（1=なし）</label><select id="groin"><option value="">未入力</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+    </div>
+    <div class="metric" style="margin-top:10px"><label>メモ</label><textarea id="memo" placeholder="走った感覚、痛み、睡眠など"></textarea></div>
+    <div class="actions">
+      <button onclick="saveLog()">今日の記録を保存</button>
+      <button class="secondary" onclick="resetWeek()">今週のチェックをリセット</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="week"><strong>トレーニングのルール</strong></div>
+    <div class="desc">
+      ・違和感が増える場合は中止・変更。<br>
+      ・自転車は軽いギアで、気持ちよく動く程度。<br>
+      ・筋トレは「まだできる」ところで終了。<br>
+      ・今週はインターバル／テンポ走を行わない。<br>
+      ・痛みが歩行や日常動作でも出る場合は運動を続けず、医療機関で相談。
+    </div>
+  </section>
+</main>
+<footer>データはこの端末のブラウザ内に保存されます。ブラウザのデータを消すと記録も消える場合があります。</footer>
+
+<script>
+const days=[
+["月","8/24","🚲","自転車 30～45分","軽いギア。会話できる程度。脚を追い込まず、仕事後のストレス発散として気持ちよく。"],
+["火","8/25","🏃","イージーラン 30～40分","呼吸が楽なペース。内転筋の違和感が増えたらウォーキングへ変更。"],
+["水","8/26","💪","軽い筋トレ 20～30分","ヒップリフト、クラムシェル、プランク、サイドプランクなど。内転筋を直接追い込まない。"],
+["木","8/27","🚲","自転車 40～60分","軽～中強度。坂道や重いギアは避ける。違和感が出たら短縮・中止。"],
+["金","8/28","🏃","イージーラン 30～40分","楽に走れる範囲。ペースは気にしない。"],
+["土","8/29","💪","筋トレ 15～25分＋軽い有酸素","筋トレは軽め。余裕があれば散歩など。脚を疲れさせる必要はなし。"],
+["日","8/30","🏃","ゆっくりラン 60～70分","今週のロング。終始楽な強度。違和感があれば時間短縮または自転車・ウォーキングへ。"]
+];
+const key="runtrain_week_20260824";
+function render(){
+ const root=document.getElementById("days"); root.innerHTML="";
+ const saved=JSON.parse(localStorage.getItem(key)||"{}");
+ days.forEach((d,i)=>{
+   const checked=!!saved["d"+i];
+   root.innerHTML+=`<section class="card ${checked?"done":""}" id="c${i}">
+    <div class="day"><div class="icon">${d[2]}</div><div style="flex:1"><div class="date">${d[0]}曜日　${d[1]}</div><div class="title">${d[3]}</div><div class="desc">${d[4]}</div></div>
+    <input class="check" type="checkbox" ${checked?"checked":""} onchange="toggle(${i},this.checked)"></div></section>`;
+ });
+ update();
+ ["fatigue","groin","memo"].forEach(id=>{let v=localStorage.getItem(key+"_"+id);if(v!==null)document.getElementById(id).value=v});
+}
+function toggle(i,v){let s=JSON.parse(localStorage.getItem(key)||"{}");s["d"+i]=v;localStorage.setItem(key,JSON.stringify(s));document.getElementById("c"+i).classList.toggle("done",v);update()}
+function update(){let s=JSON.parse(localStorage.getItem(key)||"{}");let n=days.filter((_,i)=>s["d"+i]).length;document.getElementById("bar").style.width=(n/days.length*100)+"%";document.getElementById("pct").textContent=`${n} / ${days.length} 完了`}
+function saveLog(){["fatigue","groin","memo"].forEach(id=>localStorage.setItem(key+"_"+id,document.getElementById(id).value));alert("今日の記録を保存しました。")}
+function resetWeek(){if(confirm("今週のチェックをリセットしますか？")){localStorage.removeItem(key);render()}}
+render();
+</script>
+</body>
+</html>
