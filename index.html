@@ -7,54 +7,99 @@
     sizes="32x32" href="apple-touch-icon.png">
   <link rel="icon" type="image/png"
     sizes="16x16" href="apple-touch-icon.png">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111827">
-<title>Run & Train</title>
-<style>
-body{margin:0;background:#f3f4f6;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}header{background:#111827;color:white;padding:20px}main{max-width:720px;margin:auto;padding:12px}.card{background:white;border:1px solid #e5e7eb;border-radius:16px;padding:15px;margin:10px 0}.week{display:flex;justify-content:space-between}.badge{font-size:12px;background:#f3f4f6;padding:5px 9px;border-radius:99px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.metric label{display:block;font-size:12px;color:#6b7280;margin-bottom:5px}.metric input,.metric select,.metric textarea{width:100%;box-sizing:border-box;border:1px solid #e5e7eb;border-radius:9px;padding:10px;font-size:15px}.metric textarea{min-height:65px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}button{border:0;border-radius:9px;padding:10px 13px;background:#111827;color:white;font-weight:600}button.secondary{background:#e5e7eb;color:#111827}.day{display:flex;gap:12px}.icon{font-size:27px}.date,.small{font-size:12px;color:#6b7280}.title{font-weight:700}.desc{font-size:13px;line-height:1.5;color:#4b5563;margin-top:5px}.check{margin-left:auto;width:28px;height:28px}.done{background:#e8f5e9}.progress{height:9px;background:#e5e7eb;border-radius:99px;overflow:hidden}.bar{height:100%;background:#111827;width:0%}footer{text-align:center;color:#6b7280;font-size:12px;padding:20px}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#143b36">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="RUN WEEK">
+  <meta name="description" content="週間ランニングプログラムとトレーニング記録">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <title>RUN WEEK｜週間トレーニング</title>
+  <style>
+    :root{--ink:#16302d;--muted:#687976;--paper:#f4f1e8;--card:#fffdf7;--green:#143b36;--mint:#dfece3;--orange:#ec7b3b;--line:#dedbd1;--shadow:0 12px 35px rgba(19,53,48,.09)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#e5eee6 0,#f4f1e8 290px);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;line-height:1.65}
+    button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{width:min(760px,100%);margin:auto;padding:0 16px 80px}.hero{padding:calc(26px + env(safe-area-inset-top)) 4px 22px}.eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.16em;color:#55716c}.hero h1{margin:3px 0 0;font-family:Georgia,"Yu Mincho",serif;font-size:clamp(2rem,9vw,3.4rem);letter-spacing:-.03em;line-height:1.05}.hero p{margin:12px 0 0;color:#536964}.week{display:flex;align-items:center;justify-content:space-between;margin:14px 0 10px}.week h2,.section-title{margin:0;font-size:1.15rem}.wave{font-size:.78rem;color:var(--muted)}
+    .schedule{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;overflow-x:auto;padding-bottom:8px}.day{min-width:82px;background:var(--card);border:1px solid rgba(20,59,54,.08);border-radius:18px;padding:12px 8px;text-align:center;box-shadow:0 5px 18px rgba(19,53,48,.05);position:relative}.day strong{display:block;font-size:.8rem}.date{font-size:.7rem;color:var(--muted)}.icon{font-size:1.55rem;line-height:1.3;margin-top:7px}.load{display:inline-block;margin-top:1px;padding:1px 10px;border-radius:999px;font-size:.7rem;font-weight:900}.weak{background:#e6efe9;color:#356154}.medium{background:#fff0cf;color:#8a5a00}.strong{background:#fee0d3;color:#aa3d1a}.day h3{font-size:.78rem;line-height:1.35;margin:9px 0 4px}.day p{font-size:.66rem;line-height:1.45;color:var(--muted);margin:0}
+    .card{background:var(--card);border:1px solid rgba(20,59,54,.09);border-radius:24px;padding:20px;margin-top:18px;box-shadow:var(--shadow)}.notice{background:var(--green);color:white}.notice p{margin:5px 0 0;color:#d6e3df;font-size:.9rem}.tabs{display:flex;gap:8px;margin:16px 0}.tab{border:0;border-radius:99px;padding:9px 14px;background:#e9e7df;color:#586864;font-weight:800}.tab.active{background:var(--green);color:white}.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.field.full{grid-column:1/-1}label{display:block;font-size:.78rem;font-weight:800;margin-bottom:5px;color:#536864}input,select,textarea{width:100%;border:1px solid var(--line);background:white;border-radius:12px;padding:11px 12px;color:var(--ink);min-height:46px}textarea{min-height:82px;resize:vertical}.actions{display:flex;gap:9px;margin-top:15px;flex-wrap:wrap}.primary,.secondary,.danger{border:0;border-radius:13px;padding:11px 16px;font-weight:800}.primary{background:var(--orange);color:white}.secondary{background:var(--mint);color:var(--green)}.danger{background:#f8e2dc;color:#9c3522}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.metric{background:#f0eee6;border-radius:15px;padding:10px;text-align:center}.metric b{display:block;font-size:1.18rem}.metric span{font-size:.68rem;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:24px 0}.record{border-top:1px solid var(--line);padding:14px 0}.record:first-of-type{border-top:0}.record-head{display:flex;justify-content:space-between;gap:12px}.record-title{font-weight:900}.record-meta{font-size:.78rem;color:var(--muted)}.record p{margin:5px 0 0;font-size:.86rem}.mini{border:0;background:transparent;color:#63736f;text-decoration:underline;padding:2px 4px}.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:#173a35;color:white;padding:11px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:.2s;z-index:5;font-weight:800;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:620px){.schedule{grid-template-columns:repeat(7,88px);margin-right:-16px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.summary{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:2.45rem}.card{padding:17px}}
+  </style>
 </head>
 <body>
-<header><h1>🏃 Run & Train</h1><div>トレーニング記録・コンディション管理</div></header>
-<main>
-<section class="card"><div class="week"><strong>今週のトレーニング</strong><span class="badge">試用版</span></div><p class="small">Zone 2を基本に、疲労と内転筋の状態を見ながら調整します。</p><div class="progress"><div id="bar" class="bar"></div></div><p id="pct" class="small">0 / 7 完了</p></section>
-<div id="days"></div>
-<section class="card"><div class="week"><strong>🏃 ランニング記録</strong><span class="badge">入力</span></div>
-<div class="grid">
-<label class="metric">日付<input id="date" type="date"></label>
-<label class="metric">距離 km<input id="distance" type="number" step="0.01"></label>
-<label class="metric">時間 分<input id="duration" type="number"></label>
-<label class="metric">平均心拍 bpm<input id="hr" type="number"></label>
-<label class="metric">Zone 2時間 分<input id="z2" type="number"></label>
-<label class="metric">Running Index<input id="ri" type="number"></label>
-<label class="metric">RPE 1～10<select id="rpe"><option value="">未入力</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></label>
-<label class="metric">疲労 1～5<select id="fatigue"><option value="">未入力</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
-<label class="metric">内転筋 0～5<select id="groin"><option value="">未入力</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
-</div><div class="metric" style="margin-top:10px">メモ<textarea id="note"></textarea></div>
-<div class="actions"><button onclick="saveRun()">保存</button><button class="secondary" onclick="clearForm()">入力をクリア</button></div></section>
-
-<section class="card"><div class="week"><strong>🚲💪 その他の運動</strong><span class="badge">入力</span></div>
-<div class="grid"><label class="metric">日付<input id="odate" type="date"></label><label class="metric">種目<select id="otype"><option>自転車</option><option>筋トレ</option><option>ウォーキング</option><option>ストレッチ・モビリティ</option><option>その他</option></select></label><label class="metric">時間 分<input id="otime" type="number"></label><label class="metric">強度 1～5<select id="oint"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label></div>
-<div class="metric">メモ<textarea id="onote"></textarea></div><div class="actions"><button onclick="saveOther()">保存</button></div></section>
-
-<section class="card"><div class="week"><strong>📊 今週の集計</strong></div><div id="summary" class="desc"></div><div class="actions"><button onclick="copyWeek()">今週のデータをコピー</button><button class="secondary" onclick="historyLog()">過去の記録</button></div></section>
-<section class="card"><strong>使い方</strong><p class="desc">ランニング後にPolarから距離・時間・平均心拍・Zone 2時間・Running Indexを入力し、RPE・疲労・内転筋も記録します。週末に「今週のデータをコピー」を押し、ここに貼り付けてください。</p></section>
-</main><footer>記録はこの端末のブラウザ内に保存されます。</footer>
+<main class="wrap">
+  <header class="hero"><div class="eyebrow">WEEKLY TRAINING NOTE</div><h1>Run easy.<br>Grow steady.</h1><p>楽に、長く走れる身体へ。今週は速さより、正確な動きと安定を。</p></header>
+  <section aria-labelledby="week-title">
+    <div class="week"><h2 id="week-title">8/31（月）— 9/6（日）</h2><span class="wave">弱 → 中 → 中 → 弱 → 中 → 弱 → 強</span></div>
+    <div class="schedule" id="schedule"></div>
+  </section>
+  <section class="card notice"><strong>今週のポイント</strong><p>日曜の「強」は週間内で負荷が最大という意味です。全力走ではなく、Zone 2中心で60分を楽に動き続けます。内転筋や腰の違和感が増えたら、時間を短くしてください。</p></section>
+  <section class="card" aria-labelledby="log-title">
+    <h2 class="section-title" id="log-title">トレーニング記録</h2>
+    <div class="tabs"><button class="tab active" data-kind="run">🏃 ランニング</button><button class="tab" data-kind="other">🚲💪 その他</button></div>
+    <form id="record-form"><input type="hidden" id="edit-id"><input type="hidden" id="kind" value="run">
+      <div class="fields" id="run-fields">
+        <div class="field"><label for="date">日付</label><input id="date" type="date" required></div><div class="field"><label for="distance">距離（km）</label><input id="distance" type="number" step="0.01" min="0" inputmode="decimal"></div>
+        <div class="field"><label for="minutes">時間（分）</label><input id="minutes" type="number" min="0" inputmode="numeric" required></div><div class="field"><label for="hr">平均心拍（bpm）</label><input id="hr" type="number" min="0" inputmode="numeric"></div>
+        <div class="field"><label for="zone2">Zone 2（分）</label><input id="zone2" type="number" min="0" inputmode="numeric"></div><div class="field"><label for="ri">Running Index</label><input id="ri" type="number" min="0" inputmode="numeric"></div>
+        <div class="field"><label for="rpe">RPE（1〜10）</label><input id="rpe" type="number" min="1" max="10" inputmode="numeric"></div><div class="field"><label for="fatigue">疲労度（1〜5）</label><input id="fatigue" type="number" min="1" max="5" inputmode="numeric"></div>
+        <div class="field"><label for="adductor">内転筋・股関節（0〜5）</label><input id="adductor" type="number" min="0" max="5" inputmode="numeric"></div>
+      </div>
+      <div class="fields" id="other-fields" hidden>
+        <div class="field"><label for="other-date">日付</label><input id="other-date" type="date"></div><div class="field"><label for="activity">種目</label><select id="activity"><option>自転車</option><option>筋トレ</option><option>ウォーキング</option><option>モビリティ</option><option>その他</option></select></div>
+        <div class="field"><label for="other-minutes">時間（分）</label><input id="other-minutes" type="number" min="0" inputmode="numeric"></div><div class="field"><label for="intensity">強度（1〜5）</label><input id="intensity" type="number" min="1" max="5" inputmode="numeric"></div>
+      </div>
+      <div class="field full" style="margin-top:13px"><label for="memo">メモ</label><textarea id="memo" placeholder="体調、天候、違和感など"></textarea></div>
+      <div class="actions"><button class="primary" type="submit">記録を保存</button><button class="secondary" type="button" id="cancel" hidden>編集をやめる</button></div>
+    </form>
+  </section>
+  <section class="card"><div class="week"><h2 class="section-title">今週の集計</h2><button class="secondary" id="copy-week">今週のデータをコピー</button></div><div class="summary" id="summary"></div></section>
+  <section class="card"><div class="week"><h2 class="section-title">過去の記録</h2><span class="record-meta">端末内に保存</span></div><div id="history"></div></section>
+</main>
+<div class="toast" id="toast" role="status"></div>
 <script>
-const K="runtrain_trial_20260824";
-const plan=[["月","8/24","🚲","自転車 30～45分","軽いギア。会話できる程度。"],["火","8/25","🏃","イージーラン 30～40分","Zone 2を基本。違和感が増えたらウォークへ。"],["水","8/26","💪","軽い筋トレ 20～30分","ヒップリフト、クラムシェル、プランクなど。"],["木","8/27","🚲","自転車 40～60分","軽～中強度。重いギアは避ける。"],["金","8/28","🏃","イージーラン 30～40分","楽に走れる範囲。"],["土","8/29","💪","筋トレ 15～25分＋軽い有酸素","余裕を残して終了。"],["日","8/30","🏃","ゆっくりラン 60～70分","終始楽な強度。違和感があれば短縮。"]];
-function get(){return JSON.parse(localStorage.getItem(K)||'{"checks":{},"runs":[],"other":[]}')}
-function save(x){localStorage.setItem(K,JSON.stringify(x))}
-function today(){return new Date().toISOString().slice(0,10)}
-function render(){let d=get(),root=document.getElementById("days");root.innerHTML="";plan.forEach((p,i)=>{let c=!!d.checks[i];root.innerHTML+=`<section class="card ${c?"done":""}"><div class="day"><div class="icon">${p[2]}</div><div><div class="date">${p[0]}曜日 ${p[1]}</div><div class="title">${p[3]}</div><div class="desc">${p[4]}</div></div><input class="check" type="checkbox" ${c?"checked":""} onchange="toggle(${i},this.checked)"></div></section>`});let n=plan.filter((_,i)=>d.checks[i]).length;document.getElementById("bar").style.width=n/7*100+"%";document.getElementById("pct").textContent=n+" / 7 完了";summary()}
-function toggle(i,v){let d=get();d.checks[i]=v;save(d);render()}
-function v(id){return document.getElementById(id).value}
-function saveRun(){let d=get(),r={date:v("date")||today(),distance:v("distance"),duration:v("duration"),hr:v("hr"),z2:v("z2"),ri:v("ri"),rpe:v("rpe"),fatigue:v("fatigue"),groin:v("groin"),note:v("note")};if(!r.distance&&!r.duration)return alert("距離または時間を入力してください。");d.runs.push(r);save(d);clearForm();summary();alert("保存しました。")}
-function clearForm(){["distance","duration","hr","z2","ri","rpe","fatigue","groin","note"].forEach(x=>document.getElementById(x).value="");document.getElementById("date").value=today()}
-function saveOther(){let d=get(),o={date:v("odate")||today(),type:v("otype"),time:v("otime"),intensity:v("oint"),note:v("onote")};if(!o.time)return alert("時間を入力してください。");d.other.push(o);save(d);document.getElementById("otime").value="";document.getElementById("onote").value="";summary();alert("保存しました。")}
-function summary(){let d=get(),r=d.runs,o=d.other,km=r.reduce((a,x)=>a+(+x.distance||0),0),tm=r.reduce((a,x)=>a+(+x.duration||0),0),z=r.reduce((a,x)=>a+(+x.z2||0),0);document.getElementById("summary").innerHTML=`ランニング <b>${km.toFixed(2)} km</b> ／ ${tm}分 ／ Zone 2 <b>${z}分</b><br>ランニング記録 ${r.length}回 ／ 自転車 ${o.filter(x=>x.type==="自転車").reduce((a,x)=>a+(+x.time||0),0)}分 ／ 筋トレ ${o.filter(x=>x.type==="筋トレ").length}回`}
-function copyWeek(){let d=get(),a=["【今週のトレーニング記録】",""];d.runs.forEach(x=>a.push(`${x.date} ランニング ${x.distance||"—"}km / ${x.duration||"—"}分 / 平均HR ${x.hr||"—"} / Zone2 ${x.z2||"—"}分 / Running Index ${x.ri||"—"} / RPE ${x.rpe||"—"} / 疲労 ${x.fatigue||"—"} / 内転筋 ${x.groin||"—"}${x.note?" / "+x.note:""}`));d.other.forEach(x=>a.push(`${x.date} ${x.type} ${x.time}分 / 強度${x.intensity}${x.note?" / "+x.note:""}`));let s=a.join("\n");navigator.clipboard?navigator.clipboard.writeText(s).then(()=>alert("コピーしました。このチャットに貼り付けてください。")):prompt("コピーしてください",s)}
-function historyLog(){let d=get();alert(d.runs.map(x=>x.date+" ラン "+x.distance+"km HR"+x.hr+" RI"+x.ri).concat(d.other.map(x=>x.date+" "+x.type+" "+x.time+"分")).join("\n")||"まだ記録がありません。")}
-document.getElementById("date").value=today();document.getElementById("odate").value=today();render();
-</script></body></html>
+const PROGRAM=[
+ {d:'月',date:'8/31',icon:'🧘',load:'弱',cls:'weak',title:'回復日',body:'ウォーキング20〜30分＋軽いモビリティ。体幹／ヒンジ5〜10分可'},
+ {d:'火',date:'9/1',icon:'🏃',load:'中',cls:'medium',title:'Zone 2ラン 40分',body:'ペースを追わず心拍優先。違和感があれば30分で終了'},
+ {d:'水',date:'9/2',icon:'💪',load:'中',cls:'medium',title:'筋トレ 30〜40分',body:'下半身＋体幹。RIR 2〜3、ヒンジは丁寧に'},
+ {d:'木',date:'9/3',icon:'🚲',load:'弱',cls:'weak',title:'自転車 30〜40分',body:'軽いギア。Zone 1〜低Zone 2の回復目的'},
+ {d:'金',date:'9/4',icon:'🏃',load:'中',cls:'medium',title:'Zone 2ラン 40〜45分',body:'余裕があってもペースアップしない'},
+ {d:'土',date:'9/5',icon:'🧘',load:'弱',cls:'weak',title:'体幹＋ヒンジ 20〜25分',body:'デッドバグ、バードドッグ、ヒップリフト、軽いヒンジ'},
+ {d:'日',date:'9/6',icon:'🏃',load:'強',cls:'strong',title:'ロング・イージー 60分',body:'Zone 2中心。距離目標なし、楽に動き続ける'}
+];
+document.querySelector('#schedule').innerHTML=PROGRAM.map(x=>`<article class="day"><strong>${x.d}</strong><span class="date">${x.date}</span><div class="icon">${x.icon}</div><span class="load ${x.cls}">${x.load}</span><h3>${x.title}</h3><p>${x.body}</p></article>`).join('');
+
+const STORE='running-training-data-v1';
+const legacyArrayKeys=['trainingRecords','runningTrainingRecords','workoutRecords','records'];
+const empty=()=>({version:1,records:[]});
+function normalize(r,i){
+ const type=r.type||r.kind||(r.distance!=null?'run':'other');
+ return {id:String(r.id||('legacy-'+i+'-'+(r.date||Date.now()))),type:type==='running'?'run':type,date:r.date||r.trainingDate||'',distance:r.distance??r.km??'',minutes:r.minutes??r.duration??'',hr:r.hr??r.averageHr??r.avgHr??'',zone2:r.zone2??r.zone2Minutes??'',ri:r.ri??r.runningIndex??'',rpe:r.rpe??'',fatigue:r.fatigue??'',adductor:r.adductor??r.groin??'',activity:r.activity||r.exercise||'その他',intensity:r.intensity??r.strength??'',memo:r.memo||r.note||''};
+}
+function loadData(){
+ try{const current=JSON.parse(localStorage.getItem(STORE));if(current&&Array.isArray(current.records))return {version:1,records:current.records.map(normalize)}}catch(e){}
+ let migrated=[];
+ for(const key of legacyArrayKeys){try{const v=JSON.parse(localStorage.getItem(key));if(Array.isArray(v))migrated.push(...v)}catch(e){}}
+ try{const v=JSON.parse(localStorage.getItem('runningTrainingAppData'));if(v){if(Array.isArray(v.records))migrated.push(...v.records);if(Array.isArray(v.runningRecords))migrated.push(...v.runningRecords);if(Array.isArray(v.otherRecords))migrated.push(...v.otherRecords)}}catch(e){}
+ const data={version:1,records:migrated.map(normalize)};if(migrated.length)localStorage.setItem(STORE,JSON.stringify(data));return data;
+}
+let data=loadData();
+function save(){localStorage.setItem(STORE,JSON.stringify(data));render()}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function todayJst(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
+document.querySelector('#date').value=todayJst();document.querySelector('#other-date').value=todayJst();
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>setKind(b.dataset.kind));
+function setKind(kind){document.querySelector('#kind').value=kind;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.kind===kind));document.querySelector('#run-fields').hidden=kind!=='run';document.querySelector('#other-fields').hidden=kind==='run';document.querySelector('#minutes').required=kind==='run';document.querySelector('#date').required=kind==='run';document.querySelector('#other-date').required=kind==='other';document.querySelector('#other-minutes').required=kind==='other'}
+document.querySelector('#record-form').onsubmit=e=>{e.preventDefault();const g=id=>document.querySelector('#'+id).value;const type=g('kind');const rec={id:g('edit-id')||String(Date.now()),type,date:type==='run'?g('date'):g('other-date'),distance:g('distance'),minutes:type==='run'?g('minutes'):g('other-minutes'),hr:g('hr'),zone2:g('zone2'),ri:g('ri'),rpe:g('rpe'),fatigue:g('fatigue'),adductor:g('adductor'),activity:g('activity'),intensity:g('intensity'),memo:g('memo')};const idx=data.records.findIndex(x=>x.id===rec.id);if(idx>=0)data.records[idx]=rec;else data.records.push(rec);save();resetForm();toast(idx>=0?'記録を更新しました':'記録を保存しました')};
+function resetForm(){document.querySelector('#record-form').reset();document.querySelector('#edit-id').value='';document.querySelector('#date').value=todayJst();document.querySelector('#other-date').value=todayJst();document.querySelector('#cancel').hidden=true;setKind('run')}
+document.querySelector('#cancel').onclick=resetForm;
+function weekRecords(){return data.records.filter(r=>r.date>='2026-08-31'&&r.date<='2026-09-06')}
+function render(){const wr=weekRecords(),runs=wr.filter(r=>r.type==='run'),others=wr.filter(r=>r.type!=='run');const km=runs.reduce((a,r)=>a+(+r.distance||0),0),mins=wr.reduce((a,r)=>a+(+r.minutes||0),0),z2=runs.reduce((a,r)=>a+(+r.zone2||0),0);document.querySelector('#summary').innerHTML=[['ラン',runs.length+'回'],['距離',km.toFixed(1)+'km'],['運動時間',mins+'分'],['Zone 2',z2+'分']].map(x=>`<div class="metric"><b>${x[1]}</b><span>${x[0]}</span></div>`).join('');const sorted=[...data.records].sort((a,b)=>(b.date||'').localeCompare(a.date||''));document.querySelector('#history').innerHTML=sorted.length?sorted.map(r=>`<article class="record"><div class="record-head"><div><div class="record-title">${r.type==='run'?'🏃 ランニング':'◉ '+esc(r.activity)}</div><div class="record-meta">${esc(r.date)} ・ ${esc(r.minutes)}分${r.type==='run'&&r.distance!==''?' ・ '+esc(r.distance)+'km':''}</div></div><div><button class="mini" onclick="editRecord('${r.id}')">編集</button><button class="mini" onclick="removeRecord('${r.id}')">削除</button></div></div>${r.type==='run'?`<p>平均HR ${esc(r.hr||'—')} / Zone 2 ${esc(r.zone2||'—')}分 / RI ${esc(r.ri||'—')} / RPE ${esc(r.rpe||'—')} / 疲労 ${esc(r.fatigue||'—')} / 内転筋 ${esc(r.adductor||'—')}</p>`:`<p>強度 ${esc(r.intensity||'—')}</p>`}${r.memo?`<p>${esc(r.memo)}</p>`:''}</article>`).join(''):'<div class="empty">記録はまだありません。</div>'}
+window.editRecord=id=>{const r=data.records.find(x=>x.id===id);if(!r)return;setKind(r.type);for(const [k,v] of Object.entries(r)){const map={id:'edit-id',type:'kind'};const el=document.querySelector('#'+(map[k]||k));if(el)el.value=v}if(r.type==='other'){document.querySelector('#other-date').value=r.date;document.querySelector('#other-minutes').value=r.minutes}document.querySelector('#cancel').hidden=false;document.querySelector('#log-title').scrollIntoView({behavior:'smooth'})};
+window.removeRecord=id=>{if(confirm('この記録を削除しますか？')){data.records=data.records.filter(r=>r.id!==id);save();toast('記録を削除しました')}};
+function line(r){if(r.type==='run')return `${r.date} ランニング ${r.distance||0}km / ${r.minutes||0}分 / 平均HR ${r.hr||'—'} / Zone2 ${r.zone2||'—'}分 / Running Index ${r.ri||'—'} / RPE ${r.rpe||'—'} / 疲労 ${r.fatigue||'—'} / 内転筋 ${r.adductor||'—'}${r.memo?' / '+r.memo:''}`;return `${r.date} ${r.activity} ${r.minutes||0}分 / 強度${r.intensity||'—'}${r.memo?' / '+r.memo:''}`}
+document.querySelector('#copy-week').onclick=async()=>{const txt='【今週のトレーニング記録｜2026-08-31〜2026-09-06】\n\n'+(weekRecords().sort((a,b)=>a.date.localeCompare(b.date)).map(line).join('\n')||'記録なし');try{await navigator.clipboard.writeText(txt);toast('今週のデータをコピーしました')}catch(e){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();toast('今週のデータをコピーしました')}};
+function toast(msg){const el=document.querySelector('#toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200)}
+render();
+</script>
+</body>
+</html>
