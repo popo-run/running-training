@@ -27,12 +27,12 @@
 </head>
 <body>
 <main class="wrap">
-  <header class="hero"><div class="eyebrow">WEEKLY TRAINING NOTE</div><h1>Run easy.<br>Grow steady.</h1><p>楽に、長く走れる身体へ。今週は内転筋と腰を落ち着かせながら、週3回を安定して走ります。</p></header>
+  <header class="hero"><div class="eyebrow">WEEKLY TRAINING NOTE</div><h1>Run easy.<br>Grow steady.</h1><p>楽に、長く走れる身体へ。今週は走行量を増やさず、腰の状態を確認しながら週3回を安定して走ります。</p></header>
   <section aria-labelledby="week-title">
-    <div class="week"><h2 id="week-title">9/7（月）— 9/13（日）</h2><span class="wave">弱 → 中 → 中 → 弱 → 中 → 弱 → 強</span></div>
+    <div class="week"><h2 id="week-title">9/14（月）— 9/20（日）</h2><span class="wave">弱 → 中 → 中 → 弱 → 中 → 弱 → 強</span></div>
     <div class="schedule" id="schedule"></div>
   </section>
-  <section class="card notice"><strong>今週のポイント</strong><p>日曜の「強」は週間内で負荷が最大という意味です。全力走ではありません。内転筋の違和感が2なら10〜15分短縮し、走るほど強くなる場合は中止してください。</p></section>
+  <section class="card notice"><strong>今週のポイント</strong><p>日曜の「強」は週間内で負荷が最大という意味で、全力走ではありません。腰・内転筋が0〜2で走行中に増えなければ予定どおり。違和感が強まる場合は30分以内で終了してください。</p></section>
   <section class="card" aria-labelledby="log-title">
     <h2 class="section-title" id="log-title">トレーニング記録</h2>
     <div class="tabs"><button class="tab active" data-kind="run">🏃 ランニング</button><button class="tab" data-kind="other">🚲💪 その他</button></div>
@@ -58,13 +58,13 @@
 <div class="toast" id="toast" role="status"></div>
 <script>
 const PROGRAM=[
- {d:'月',date:'9/7',icon:'🧘',load:'弱',cls:'weak',title:'回復日 15〜20分',body:'モビリティ＋軽い体幹。内転筋を強く伸ばさない'},
- {d:'火',date:'9/8',icon:'🏃',load:'中',cls:'medium',title:'Zone 2ラン 40〜45分',body:'最初の10分は特にゆっくり。心拍と体感を優先'},
- {d:'水',date:'9/9',icon:'💪',load:'中',cls:'medium',title:'筋トレ 35〜40分',body:'下半身＋体幹。RIR 3、ヒンジは正確さを優先'},
- {d:'木',date:'9/10',icon:'🚲',load:'弱',cls:'weak',title:'自転車 30〜40分',body:'軽いギア。手が痺れる前に姿勢や握る位置を変える'},
- {d:'金',date:'9/11',icon:'🏃',load:'中',cls:'medium',title:'Zone 2ラン 40分',body:'内転筋が0〜1なら実施。2なら30分へ短縮'},
- {d:'土',date:'9/12',icon:'🧘',load:'弱',cls:'weak',title:'体幹＋ヒンジ 20〜25分',body:'デッドバグ、バードドッグ、ヒップリフト。追い込まない'},
- {d:'日',date:'9/13',icon:'🏃',load:'強',cls:'strong',title:'ロング・イージー 55分',body:'Zone 2中心。距離目標なし、今週は延長しない'}
+ {d:'月',date:'9/14',icon:'🧘',load:'弱',cls:'weak',title:'回復日 20〜30分',body:'モビリティ＋理学療法士から教わったエクササイズ。ヒンジは軽く確認'},
+ {d:'火',date:'9/15',icon:'🏃',load:'中',cls:'medium',title:'Zone 2ラン 45分',body:'最初の10分はゆっくり。新しいシューズに慣れることを優先'},
+ {d:'水',date:'9/16',icon:'💪',load:'中',cls:'medium',title:'筋トレ 35〜40分',body:'下半身＋体幹。RIR 3、違和感が増える種目は負荷を下げる'},
+ {d:'木',date:'9/17',icon:'🚲',load:'弱',cls:'weak',title:'自転車 30〜40分',body:'軽いギアで回復。手が痺れたら握る位置と姿勢を変える'},
+ {d:'金',date:'9/18',icon:'🏃',load:'中',cls:'medium',title:'Zone 2ラン 45〜50分',body:'会話できる余裕とRPE 2〜3を優先。暑い場合はペースを落とす'},
+ {d:'土',date:'9/19',icon:'🧘',load:'弱',cls:'weak',title:'体幹＋モビリティ 20〜25分',body:'デッドバグ、バードドッグ、ヒップリフト、胸椎と股関節の動作確認'},
+ {d:'日',date:'9/20',icon:'🏃',load:'強',cls:'strong',title:'ロング・イージー 65分',body:'Zone 2中心。距離目標なし、姿勢を保てる楽な強度で走る'}
 ];
 document.querySelector('#schedule').innerHTML=PROGRAM.map(x=>`<article class="day"><strong>${x.d}</strong><span class="date">${x.date}</span><div class="icon">${x.icon}</div><span class="load ${x.cls}">${x.load}</span><h3>${x.title}</h3><p>${x.body}</p></article>`).join('');
 
@@ -92,12 +92,12 @@ function setKind(kind){document.querySelector('#kind').value=kind;document.query
 document.querySelector('#record-form').onsubmit=e=>{e.preventDefault();const g=id=>document.querySelector('#'+id).value;const type=g('kind');const rec={id:g('edit-id')||String(Date.now()),type,date:type==='run'?g('date'):g('other-date'),distance:g('distance'),minutes:type==='run'?g('minutes'):g('other-minutes'),hr:g('hr'),zone2:g('zone2'),ri:g('ri'),rpe:g('rpe'),fatigue:g('fatigue'),adductor:g('adductor'),lowerBack:g('lowerBack'),activity:g('activity'),intensity:g('intensity'),memo:g('memo')};const idx=data.records.findIndex(x=>x.id===rec.id);if(idx>=0)data.records[idx]=rec;else data.records.push(rec);save();resetForm();toast(idx>=0?'記録を更新しました':'記録を保存しました')};
 function resetForm(){document.querySelector('#record-form').reset();document.querySelector('#edit-id').value='';document.querySelector('#date').value=todayJst();document.querySelector('#other-date').value=todayJst();document.querySelector('#cancel').hidden=true;setKind('run')}
 document.querySelector('#cancel').onclick=resetForm;
-function weekRecords(){return data.records.filter(r=>r.date>='2026-09-07'&&r.date<='2026-09-13')}
+function weekRecords(){return data.records.filter(r=>r.date>='2026-09-14'&&r.date<='2026-09-20')}
 function render(){const wr=weekRecords(),runs=wr.filter(r=>r.type==='run'),others=wr.filter(r=>r.type!=='run');const km=runs.reduce((a,r)=>a+(+r.distance||0),0),mins=wr.reduce((a,r)=>a+(+r.minutes||0),0),z2=runs.reduce((a,r)=>a+(+r.zone2||0),0);document.querySelector('#summary').innerHTML=[['ラン',runs.length+'回'],['距離',km.toFixed(1)+'km'],['運動時間',mins+'分'],['Zone 2',z2+'分']].map(x=>`<div class="metric"><b>${x[1]}</b><span>${x[0]}</span></div>`).join('');const sorted=[...data.records].sort((a,b)=>(b.date||'').localeCompare(a.date||''));document.querySelector('#history').innerHTML=sorted.length?sorted.map(r=>`<article class="record"><div class="record-head"><div><div class="record-title">${r.type==='run'?'🏃 ランニング':'◉ '+esc(r.activity)}</div><div class="record-meta">${esc(r.date)} ・ ${esc(r.minutes)}分${r.type==='run'&&r.distance!==''?' ・ '+esc(r.distance)+'km':''}</div></div><div><button class="mini" onclick="editRecord('${r.id}')">編集</button><button class="mini" onclick="removeRecord('${r.id}')">削除</button></div></div>${r.type==='run'?`<p>平均HR ${esc(r.hr||'—')} / Zone 2 ${esc(r.zone2||'—')}分 / RI ${esc(r.ri||'—')} / RPE ${esc(r.rpe||'—')} / 疲労 ${esc(r.fatigue||'—')} / 内転筋 ${esc(r.adductor!==''?r.adductor:'—')} / 腰 ${esc(r.lowerBack!==''?r.lowerBack:'—')}</p>`:`<p>強度 ${esc(r.intensity||'—')}</p>`}${r.memo?`<p>${esc(r.memo)}</p>`:''}</article>`).join(''):'<div class="empty">記録はまだありません。</div>'}
 window.editRecord=id=>{const r=data.records.find(x=>x.id===id);if(!r)return;setKind(r.type);for(const [k,v] of Object.entries(r)){const map={id:'edit-id',type:'kind'};const el=document.querySelector('#'+(map[k]||k));if(el)el.value=v}if(r.type==='other'){document.querySelector('#other-date').value=r.date;document.querySelector('#other-minutes').value=r.minutes}document.querySelector('#cancel').hidden=false;document.querySelector('#log-title').scrollIntoView({behavior:'smooth'})};
 window.removeRecord=id=>{if(confirm('この記録を削除しますか？')){data.records=data.records.filter(r=>r.id!==id);save();toast('記録を削除しました')}};
 function line(r){if(r.type==='run')return `${r.date} ランニング ${r.distance||0}km / ${r.minutes||0}分 / 平均HR ${r.hr||'—'} / Zone2 ${r.zone2||'—'}分 / Running Index ${r.ri||'—'} / RPE ${r.rpe||'—'} / 疲労 ${r.fatigue||'—'} / 内転筋 ${r.adductor!==''?r.adductor:'—'} / 腰 ${r.lowerBack!==''?r.lowerBack:'—'}${r.memo?' / '+r.memo:''}`;return `${r.date} ${r.activity} ${r.minutes||0}分 / 強度${r.intensity||'—'}${r.memo?' / '+r.memo:''}`}
-document.querySelector('#copy-week').onclick=async()=>{const txt='【今週のトレーニング記録｜2026-09-07〜2026-09-13】\n\n'+(weekRecords().sort((a,b)=>a.date.localeCompare(b.date)).map(line).join('\n')||'記録なし');try{await navigator.clipboard.writeText(txt);toast('今週のデータをコピーしました')}catch(e){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();toast('今週のデータをコピーしました')}};
+document.querySelector('#copy-week').onclick=async()=>{const txt='【今週のトレーニング記録｜2026-09-14〜2026-09-20】\n\n'+(weekRecords().sort((a,b)=>a.date.localeCompare(b.date)).map(line).join('\n')||'記録なし');try{await navigator.clipboard.writeText(txt);toast('今週のデータをコピーしました')}catch(e){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();toast('今週のデータをコピーしました')}};
 function toast(msg){const el=document.querySelector('#toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200)}
 render();
 </script>
